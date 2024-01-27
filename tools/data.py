@@ -1,6 +1,7 @@
 import http.client
 import json
 from urllib.parse import urlencode
+import coor_to_zip
 
 def geocode(address, api_key):
     host = "maps.googleapis.com"
@@ -37,6 +38,7 @@ def get_company_address(api_key, company_name, city):
         connection.close()
         return None
 
+
 host = 'jooble.org'
 key = 'ba0e5c67-fec5-49b3-9f46-5d50a445097b'
 google_api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
@@ -45,12 +47,11 @@ connection = http.client.HTTPConnection(host)
 #request headers
 headers = {"Content-type": "application/json"}
 #json query
-body = '{ "keywords": "software engineer", "location": "irvine", "radius": "10"}'
+body = '{ "keywords": "google software engineer", "location": "92617", "radius": "2"}'
 connection.request('POST','/api/' + key, body, headers)
 response = connection.getresponse()
 print(response.status, response.reason)
 
-print(json.loads('{"title": "habeeby"}'))
 s = (str(response.read().decode('utf-8'))[2:].split("},"))
 for i in range(len(s)):
     s[i] += "}"

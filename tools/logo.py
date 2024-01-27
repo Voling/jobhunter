@@ -1,14 +1,11 @@
 import http.client
 
 
-domain = 'google.com'
-
+domain = 'amazon.com'
 url = f"/{domain}"
-
 
 connection = http.client.HTTPSConnection("logo.clearbit.com")
 connection.request("GET", url)
-
 response = connection.getresponse()
 
 if response.status == 200:
