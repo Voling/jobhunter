@@ -1,0 +1,94 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background-color: #111;
+    margin: 0;
+    padding: 0;
+    background-image: url(/public/images/cover.png);
+    background-size: cover;
+}
+
+.container {
+    text-align: center;
+    padding: 50px 20px;
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    color: #b833ff; 
+    font-size: 4.5em;
+    text-shadow: 0 0 10px #b833ff;
+    margin-bottom: 20px;
+    font-family: 'Exo';
+}
+
+
+h4 {
+    color: #b833ff;
+    font-size: 2em;
+    text-shadow: 0 0 10px #b833ff;
+    margin-bottom: 20px;
+    font-family: 'Exo';
+}
+
+
+
+/* Optional: If you also want to center the content vertically in the entire viewport */
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This will make the container take up the full viewport height */
+}
+
+
+
+p {
+    color: #39ff14; /* Bright green */
+    font-size: 1.2em;
+    text-shadow: 0 0 10px #39ff14;
+    margin-bottom: 40px;
+}
+
+
+.button-style {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button-style:hover {
+    background-color: #0056b3;
+}
+
+/* .button-style:active {
+    transform: translateY(7px);
+} */
+
+
+
+.button {
+    background-color: transparent;
+    color: #39ff14; /* Bright green */
+    border: 2px solid #39ff14;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: #39ff14; /* Bright green */
+    color: #000;
+    text-shadow: none;
+}
+
+/* Add additional styles as needed */
