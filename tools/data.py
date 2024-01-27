@@ -47,7 +47,7 @@ connection = http.client.HTTPConnection(host)
 #request headers
 headers = {"Content-type": "application/json"}
 #json query
-body = '{ "keywords": "google software engineer", "location": "92617", "radius": "2"}'
+body = '{ "keywords": "software engineer", "location": "90210", "radius": "2"}'
 connection.request('POST','/api/' + key, body, headers)
 response = connection.getresponse()
 print(response.status, response.reason)
@@ -56,7 +56,9 @@ s = (str(response.read().decode('utf-8'))[2:].split("},"))
 for i in range(len(s)):
     s[i] += "}"
     s[i] = rf'{s[i]}'
-for i in range(1, len(s)-1):
+s[0] = s[0][s[0].find("[")+1:]
+s[-1] = s[-1][:-3]
+for i in range(len(s)):
     print("Title: ", json.loads(s[i])["title"] + ", " + "Location: " + json.loads(s[i])["location"], end = ", ")
     try:
         print("Company: " + json.loads(s[i])["company"])
