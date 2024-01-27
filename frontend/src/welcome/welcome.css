@@ -1,33 +1,90 @@
-body {
+html {
+    height: 100%
+}
+
+.welcome-container {
     font-family: 'Arial', sans-serif;
     color: #fff;
     background-color: #111;
     margin: 0;
     padding: 0;
-    background-image: url(/public/images/cover.png);
+    background-image: url(/public/images/cybergif.gif);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
-.container {
-    text-align: center;
-    padding: 50px 20px;
-    backdrop-filter: blur(5px);
+.hxh {
+    width: 50px;
+    height: 50px;
 }
+
+
+
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0);
+        opacity: 1;
+        text-shadow: none;
+    }
+    10% {
+        transform: translate(-5px, 5px);
+        opacity: 0.8;
+        text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+    }
+    20% {
+        transform: translate(5px, -5px);
+        opacity: 0;
+        text-shadow: none;
+    }
+    30% {
+        transform: translate(-5px, -5px);
+        opacity: 0.8;
+        text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+    }
+    40%, 60% {
+        transform: translate(0);
+        opacity: 0.8;
+        text-shadow: none;
+    }
+    50% {
+        transform: translate(5px, 5px);
+        opacity: 1;
+        text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #b833ff;
+    }
+    70% {
+        transform: translate(-5px, 5px);
+        opacity: 0.8;
+        text-shadow: 0 0 5px #39ff14;
+    }
+    80%, 90% {
+        transform: translate(0);
+        opacity: 1;
+        text-shadow: none;
+    }
+}
+
+
 
 h1 {
-    color: #b833ff; 
+    color: #b833ff;
+    position: relative;
+    animation: glitch 1s linear infinite;
     font-size: 4.5em;
-    text-shadow: 0 0 10px #b833ff;
+    text-shadow: 0 0 10px #39ff14;
     margin-bottom: 20px;
     font-family: 'Exo';
 }
 
 
+
+
 h4 {
-    color: #b833ff;
+    color: #39ff14;
     font-size: 2em;
     text-shadow: 0 0 10px #b833ff;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     font-family: 'Exo';
 }
 
@@ -39,56 +96,90 @@ h4 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* This will make the container take up the full viewport height */
+    height: 50vh;
 }
 
+.features-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+li {
+    list-style: none;
+    margin: 10px;
+}
 
 
 p {
     color: #39ff14; /* Bright green */
     font-size: 1.2em;
-    text-shadow: 0 0 10px #39ff14;
-    margin-bottom: 40px;
+    text-shadow: 0 0 10px #b833ff;
+    /* margin-bottom: 40px; */
+}
+
+li, .member {
+    color: #39ff14;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px #b833ff;
+}
+
+
+.team-section {
+    /* margin-bottom: 40px; */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.team-members {
+    display: flex;
+    flex-direction: row; /* Lay out children horizontally */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: space-around; /* Center items horizontally */
+    
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
 }
 
 
 .button-style {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 15px 30px; /* Adjust padding as needed */
     margin: 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: #b833ff; /* Button background color */
+    color: white; /* Text color */
     text-align: center;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    font-size: 1.2em; /* Adjust font size as needed */
+    font-weight: bold; /* Bold font */
+    border-radius: 10px; /* Adjust border radius as needed */
+    border: 2px solid #39ff14; /* Border color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for 3D effect */
+    transition: all 0.3s; /* Transition for all properties */
 }
 
 .button-style:hover {
-    background-color: #0056b3;
+    background-color: #b833ff; /* Keep the same background color on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+    border-color: #39ff14; /* Keep the same border color on hover */
 }
 
-/* .button-style:active {
-    transform: translateY(7px);
-} */
 
 
 
-.button {
-    background-color: transparent;
-    color: #39ff14; /* Bright green */
-    border: 2px solid #39ff14;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+
+.cta-section {
+    text-align: center;
 }
 
-.button:hover {
-    background-color: #39ff14; /* Bright green */
-    color: #000;
-    text-shadow: none;
+.contact-info {
+    text-align: center;
 }
 
-/* Add additional styles as needed */
+
