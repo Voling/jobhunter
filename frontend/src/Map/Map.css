@@ -1,0 +1,12 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+.menu-section {
+    width: 250px;
+    background-color: #ffffff;
+}
+.map-section {
+    flex-grow: 1;
+}
