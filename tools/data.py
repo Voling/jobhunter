@@ -3,9 +3,10 @@ import json
 from urllib.parse import urlencode
 import coor_to_zip
 
-def geocode(address, api_key):
+def geocode(address):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
+    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
     params = urlencode({'address': address, 'key': api_key})
     connection = http.client.HTTPSConnection(host)
     connection.request("GET", f"{base_url}?{params}")
@@ -17,10 +18,10 @@ def geocode(address, api_key):
         return response.status, response.reason
 
 
-def get_company_address(api_key, company_name, city):
+def get_company_address(company_name, city):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
-    
+    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
     params = f"?address={company_name},{city}&key={api_key}"
 
     connection = http.client.HTTPSConnection(host)
@@ -41,7 +42,6 @@ def get_company_address(api_key, company_name, city):
 
 host = 'jooble.org'
 key = 'ba0e5c67-fec5-49b3-9f46-5d50a445097b'
-google_api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
 
 connection = http.client.HTTPConnection(host)
 #request headers
@@ -62,11 +62,11 @@ for i in range(len(s)):
     print("Title: ", json.loads(s[i])["title"] + ", " + "Location: " + json.loads(s[i])["location"], end = ", ")
     try:
         print("Company: " + json.loads(s[i])["company"])
-        address = str(get_company_address(google_api_key, "".join(json.loads(s[i])["company"].split()), 
+        address = str(get_company_address("".join(json.loads(s[i])["company"].split()), 
                                                       "".join(str(json.loads(s[i])["location"]).split(", ")[0].split())))
         print("The address is: ", address)
         if len(address.split(',')) == 4:
-            print("Coordinates are: ", geocode(address, google_api_key)['results'][0]['geometry']['location'])
+            print("Coordinates are: ", geocode(address)['results'][0]['geometry']['location'])
     except Exception as e:
         print(e)
     print(" ")
