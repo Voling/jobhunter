@@ -2,9 +2,10 @@ import http.client
 import json
 from urllib.parse import urlencode
 
-def get_directions(api_key, origin, destination):
+def get_real_distance(origin, destination):
     host = "maps.googleapis.com"
     base_url = "/maps/api/directions/json"
+    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
 
     params = urlencode({ 'origin': origin, 'destination': destination,'key': api_key})
 
@@ -22,15 +23,3 @@ def get_directions(api_key, origin, destination):
     else:
         connection.close()
         return None
-
-api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
-
-origin = 'Corelogic Ivrine'
-destination = 'University town center irvine'
-
-distance = get_directions(api_key, origin, destination)
-
-if distance:
-    print(f"The total distance between {origin} and {destination} is: {distance}")
-else:
-    print("Failed to fetch directions.")
