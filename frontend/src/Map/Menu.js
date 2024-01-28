@@ -1,12 +1,12 @@
 import React from 'react';
-import './Query.ts'
-// import MapContext from './MapContext';
+import MapContext from './MapContext';
+import { useContext } from 'react'
+import { fetchListings } from './api';
 
 function Menu() {
-    // const { position, listings, setPosition, setListings } = useContext(MapContext);
+    const { position, setPosition, listings, setListings } = useContext(MapContext);
     const [input, setInput] = React.useState("")
     const [radius, setRadius] = React.useState(5)
-
 
     React.useEffect(() => {
         const timer = setTimeout(() => {
@@ -14,8 +14,6 @@ function Menu() {
         }, 2000)
         return () => clearTimeout(timer)
     }, [input])
-
-
 
     function handleInputChange(e) {
         setInput(e.target.value) //state management
@@ -26,9 +24,22 @@ function Menu() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault(); // Prevent the default form submission behavior
-        console.log("Form submitted. Job Name:", input, "Radius:", radius, "Position X:", "Position Y:");
-        // send to Query.ts (positionX, positionY, input, radius)
+        // e.preventDefault(); // Prevent the default form submission behavior
+        // console.log("Form submitted. Job Name:", input, "Radius:", radius, "Position X:", position[0], "Position Y:", position[1]);
+        e.preventDefault();
+        try {
+            const data = fetchListings({
+                keyword: input,
+                radius: radius,
+                positionX: position[0],
+                positionY: position[1]
+            });
+
+            console.log("Listings fetched successfully:", data);
+            setListings(data);
+        } catch (error) {
+            console.error("Failed to fetch listings:", error);
+        }
     }
 
     return (

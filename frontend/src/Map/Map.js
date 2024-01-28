@@ -5,30 +5,23 @@ import 'leaflet/dist/leaflet.css';
 import './Map.css'
 import Menu from './Menu.js'
 import Listings from './Listings.js'
-import MapContext from './MapContext'; // Import the context
+import MapContext from './MapContext';
+import { useContext } from 'react';
 /*
-Context: input
-State:
+Context:
     position: [x,y] latlng of house marker
     listings: [[x,y], [a, b]...] latlngs of X precreated markers
         Y of X markers will be rendered/not rendered based on f(Y) job listings (y*2?) for smooth performance
 */
 
-// export const MapContext = React.createContext({
-//     position: [33.640, -117.838],
-//     setPosition: () => { },
-//     listings: [],
-//     setListings: () => { }
-// })
-
 function Map() {
-    const [position, setPosition] = React.useState([33.640, -117.838]);
-    const [listings, setListings] = React.useState([]);
+
+    const { position, setPosition, listings, setListings } = useContext( MapContext )
     function ClickHandler({ onClick }) { //on click, move marker and show listings.
         useMapEvents({
             click(e) {
                 (function changeHouseLocation() {
-                    setPosition(e.latlng)
+                    setPosition([e.latlng.lat, e.latlng.lng])
                 })();
                 (async function retrieveJobResults() {
                     return [[]]; //input, radius, 
@@ -38,12 +31,11 @@ function Map() {
             } //
         })
     }
+    console.log("hi")
     return (
-        // <MapContext.Provider value={{ position, setPosition, listings, setListings }}>
             <div className="app-container">
                 <div className="menu-section">
                     <Menu></Menu>
-
                 </div>
                 <div className="map-section">
                     <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>
@@ -56,12 +48,11 @@ function Map() {
                                 UCI
                             </Popup>
                         </Marker>
-                        {listings.length == 0 && <Listings></Listings>}
+                        <Listings></Listings>
                         <ClickHandler />
                     </MapContainer>
                 </div>
             </div>
-        // </MapContext.Provider>
     );
 
 }
