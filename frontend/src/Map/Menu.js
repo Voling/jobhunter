@@ -33,8 +33,7 @@ function Menu() {
                 radius: radius,
                 positionX: position[0],
                 positionY: position[1]
-            });
-
+            }); //get data from server
             console.log("Listings fetched successfully:", data);
             setListings(data);
         } catch (error) {

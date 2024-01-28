@@ -14,9 +14,9 @@ const test = `[
     "Geo_distance": 0.874342945871305,
     "Real_distance": "1.3 mi",
     "dummy": 1.3
-  }`
+  }]`
 export async function fetchListings({ keyword, radius, positionX, positionY }) {
-
+  console.log("Sending query...")
   const response = await axiosInstance.get('/api/', {
     params: {
       keyword,
@@ -25,8 +25,11 @@ export async function fetchListings({ keyword, radius, positionX, positionY }) {
       positionY
     }
   }).then(function () {
-    return response.data;
+    //return response.data;
+    return test;
   }).catch(function () {
+    // console.log(test)
+    return test
     console.error("Failed to retrieve")
     
     return []
