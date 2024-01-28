@@ -18,7 +18,7 @@ const test = `[
 export async function fetchListings({ keyword, radius, positionX, positionY }) {
   console.log("Sending listings query...");
   try {
-    const response = await axiosInstance.get('/api/listings', {
+    const response = await axiosInstance.get('api/search/', {
       params: {
         keyword,
         radius,
