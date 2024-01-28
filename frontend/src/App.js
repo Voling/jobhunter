@@ -14,8 +14,6 @@ function App() {
   const location = useLocation();
 
   return (
-    // <TransitionGroup>
-    // <CSSTransition key={location.key} classNames="fade" timeout={300}>
 
     <Routes location={location} keys={location.pathname}>
       <Route index element={<Welcome />} />
@@ -23,8 +21,7 @@ function App() {
       <Route path="/about" element={<About />} />
     </Routes>
 
-    //     </CSSTransition>
-    // </TransitionGroup>
+
   );
 }
 

@@ -5,6 +5,7 @@ interface ListingRequest {
     positionX: number;
     positionY: number;
     keyword: string;
+    radius: number;
 }
 interface ListingResponse {
     //to be defined from backend
