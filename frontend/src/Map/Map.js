@@ -6,7 +6,7 @@ import './Map.css'
 import Menu from './Menu.js'
 import Listings from './Listings.js'
 import MapContext from './MapContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 /*
 Context:
     position: [x,y] latlng of house marker
@@ -17,6 +17,20 @@ Context:
 function Map() {
 
     const { position, setPosition, listings, setListings } = useContext( MapContext )
+
+    // if (addressSet) {
+    //     (function changeHouseLocation() {
+    //         setPosition([]) // api coordinates from backend
+    //     })();
+    //     (async function retrieveJobResults() {
+    //         return [[]]; //input, radius, 
+    //     })().then() //backend
+    //     //setListings(listings.empty());
+    //     console.log(address); //print
+    // }
+
+
+
     function ClickHandler({ onClick }) { //on click, move marker and show listings.
         useMapEvents({
             click(e) {
@@ -30,8 +44,10 @@ function Map() {
                 console.log(e.latlng); //print
             } //
         })
+        // console.log(address)
     }
-    console.log("hi")
+
+
     return (
             <div className="app-container">
                 <div className="menu-section">
@@ -57,9 +73,9 @@ function Map() {
 
 }
 const testIcon = new L.Icon({
-    iconUrl: 'images/ethansditto.png', // URL to the custom icon image
-    iconSize: [70, 41],    // Size of the icon
-    iconAnchor: [12, 41],  // Point of the icon which will correspond to marker's location
-    popupAnchor: [15, -35], // Point from which the popup should open relative to the iconAnchor
+    iconUrl: 'map_resources/pin.png', // URL to the custom icon image
+    iconSize: [40, 50],    // Size of the icon
+    iconAnchor: [20, 25],  // midpoint
+    popupAnchor: [0, -25], // offset from iconanchor
 }); //testing
 export default Map;
