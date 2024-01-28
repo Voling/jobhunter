@@ -2,7 +2,7 @@ import http.client
 import json
 from urllib.parse import urlencode
 
-def get_directions(origin, destination):
+def get_real_distance(origin, destination):
     host = "maps.googleapis.com"
     base_url = "/maps/api/directions/json"
     api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'

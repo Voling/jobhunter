@@ -1,6 +1,6 @@
 from math import radians, sin, cos, sqrt, atan2
 
-def haversine(lat1, lon1, lat2, lon2):
+def get_geo_distance(lat1, lon1, lat2, lon2):
     R = 6371.0
 
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
