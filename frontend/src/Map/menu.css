@@ -1,29 +1,60 @@
 .menu-container {
-    font-family: 'Arial', sans-serif;
-    color: #333;
+    font-family: 'Exo';
     max-width: 300px;
     padding: 20px;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 4px solid #39ff14;
+    box-shadow: 0 2px 4px rgba(161, 93, 93, 0.2);
     margin: 20px;
     position: fixed;
-    top: 0;
-    left: -300px; /* or use percentage */
-    z-index: 1000; /* higher than the map's z-index */
-    width: 300px; /* or any desired width */
-    height: 50%; /* full height */
-    background: white;
+    top: 23%;
+    left: -500px;
+    z-index: 1000;
+    width: 250px; 
+    height: 35%;
+    background: #b833ff;
     transition: left 0.5s ease-in-out;
 }
 
 .menu-container.open {
-    left: 0; /* Slide in */
+    left: 1%; 
+}
+
+button:not([type="submit"]) {
+    position: fixed;
+    z-index: 1001; 
+    padding: 10px;
+    background-color: #b833ff;
+    border: 4px solid #39ff14;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: large;
+    color: white;
+}
+.toggleMenu:hover {
+    background-color: #39ff14;
 }
 
 .toggleMenu {
-    margin-bottom: 20px;
+    /* right: 10px; */
+    top: 17%; 
+    left: 2%; 
 }
+.home {
+    position: fixed;
+    z-index: 1001; 
+    padding: 10px;
+    background-color: #b833ff;
+    border: 4px solid #39ff14;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: large;
+    color: white;
+    top: 5%;
+    right: 2%;
+    text-decoration: none;
+}
+
 
 .menu-container form {
     display: flex;
@@ -34,33 +65,50 @@
     margin-bottom: 10px;
 }
 
-.menu-container label > div {
-    font-size: 14px;
+.menu-container label > span {
+    font-size: 16px;
     color: #555;
+    border-radius: 2px;
     margin-bottom: 5px;
+    /* padding-bottom: 5px; */
 }
 
 .menu-container input[type="text"],
 .menu-container input[type="number"] {
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 4px solid #39ff14;
+    background: white;
+    border-radius: 12px;
     font-size: 14px;
+}
+
+.menu-container input[type="text"]:hover,
+.menu-container input[type="number"]:hover {
+    border-color: #b833ff;
 }
 
 .menu-container button {
     padding: 10px;
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: #b833ff;
+    border: 4px solid #39ff14;
+    border-radius: 12px;
     cursor: pointer;
     margin-top: 10px;
+    font-size: large;
+    color: white;
 }
 
 .menu-container button:hover {
-    background-color: #357ae8;
+    background-color: #39ff14;
 }
 
 
-/* swiwnging */
+body {
+    margin: 0;
+    padding: 9px; 
+    box-sizing: border-box;
+    background-color: #b833ff;
+    border: 3px solid #39ff14; 
+    position: relative;
+}
+

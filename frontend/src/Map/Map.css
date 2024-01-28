@@ -1,12 +1,12 @@
 .app-container {
     display: flex;
-    height: 100vh;
+    height: 96vh;
 }
 
-.menu-section {
+/* .menu-section {
     width: 250px;
     background-color: #ffffff;
-}
+} */
 .map-section {
     flex-grow: 1;
 }
