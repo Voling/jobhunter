@@ -16,23 +16,20 @@ const test = `[
     "dummy": 1.3
   }]`
 export async function fetchListings({ keyword, radius, positionX, positionY }) {
-  console.log("Sending query...")
-  const response = await axiosInstance.get('/api/', {
-    params: {
-      keyword,
-      radius,
-      positionX,
-      positionY
-    }
-  }).then(function () {
-    //return response.data;
-    return test;
-  }).catch(function () {
-    // console.log(test)
-    return test
-    console.error("Failed to retrieve")
-    
-    return []
-  });
-
+  console.log("Sending query...");
+  try {
+    const response = await axiosInstance.get('/api/', {
+      params: {
+        keyword,
+        radius,
+        positionX,
+        positionY
+      }
+    });
+    // Assuming the response data is the format you need
+    return response.data;
+  } catch (error) {
+    console.error("Failed to retrieve, returning test data", error);
+    return JSON.parse(test);
+  }
 }
