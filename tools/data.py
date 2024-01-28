@@ -132,7 +132,8 @@ def search(keyw, loca, rad, lat_input, lng_input):
     lst = []
     for i in range(len(s)):
         dct = {"Title": "", "Location": "", "Company": "", "Address": "",  
-               "Lat": "", "Lng" : "", "Geo_distance" : "", "Real_distance": "", "dummy": 10000}
+               "Lat": "", "Lng" : "", "Geo_distance" : "", "Real_distance": "", "dummy": 10000
+               ,"Description": "", "Link": ""}
         #print("Title: ", json.loads(s[i])["title"] + ", " + "Location: " + json.loads(s[i])["location"], end = ", ")
         json_obj = json.loads(s[i])
         dct["Title"] = json_obj["title"]
@@ -153,6 +154,9 @@ def search(keyw, loca, rad, lat_input, lng_input):
                                                               coor_to_zip.get_address(dct["Lat"], dct["Lng"]))
             dct["dummy"] = float(dct["Real_distance"][:-3])
             #l = dct["Address"].split(", ")
+        dct["Link"] = json_obj['link']
+        dct["Description"] = json_obj['snippet']
+        #print(json_obj)
         lst.append(dct)
 
     #return sorted(lst, key=lambda x: x["dummy"])
