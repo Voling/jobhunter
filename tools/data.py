@@ -23,6 +23,21 @@ def geocode(address):
         return response.status, response.reason
 
 
+#find coordinates given address
+def only_geocode(address):
+    host = "maps.googleapis.com"
+    base_url = "/maps/api/geocode/json"
+    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
+    params = urlencode({'address': address, 'key': api_key})
+    connection = http.client.HTTPSConnection(host)
+    connection.request("GET", f"{base_url}?{params}")
+    response = connection.getresponse()
+    data = json.loads(response.read().decode("utf-8"))
+    if response.status == 200:
+        return data['results'][0]['geometry']['location']["lat"], data['results'][0]['geometry']['location']["lng"]
+    else:
+        return response.status, response.reason
+
 
 #find exact address of a company given city,state
 def get_company_address(company_name, city):
@@ -117,7 +132,8 @@ def search(keyw, loca, rad, lat_input, lng_input):
     lst = []
     for i in range(len(s)):
         dct = {"Title": "", "Location": "", "Company": "", "Address": "",  
-               "Lat": "", "Lng" : "", "Geo_distance" : "", "Real_distance": "", "dummy": 10000}
+               "Lat": "", "Lng" : "", "Geo_distance" : "", "Real_distance": "", "dummy": 10000
+               ,"Description": "", "Link": ""}
         #print("Title: ", json.loads(s[i])["title"] + ", " + "Location: " + json.loads(s[i])["location"], end = ", ")
         json_obj = json.loads(s[i])
         dct["Title"] = json_obj["title"]
@@ -138,6 +154,9 @@ def search(keyw, loca, rad, lat_input, lng_input):
                                                               coor_to_zip.get_address(dct["Lat"], dct["Lng"]))
             dct["dummy"] = float(dct["Real_distance"][:-3])
             #l = dct["Address"].split(", ")
+        dct["Link"] = json_obj['link']
+        dct["Description"] = json_obj['snippet']
+        #print(json_obj)
         lst.append(dct)
 
     #return sorted(lst, key=lambda x: x["dummy"])
@@ -164,4 +183,4 @@ with open(file_path, 'w') as json_file:
     json.dump(data, json_file, indent=2) 
 """
 #search("software engineer", coor_to_zip.get_zip(33.736696, -118.015753), 10, 33.736696, -118.015753)
-search("software engineer", None, 10, 33.736696, -118.015753)
+#print(only_geocode("141 Berkeley Ave, Irvine"))
