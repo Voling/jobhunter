@@ -1,9 +1,10 @@
 import http.client
 import json
 
-def get_zip(api_key, lat, lng):
+def get_zip(lat, lng):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
+    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
 
     params = f"latlng={lat},{lng}&key={api_key}"
 
