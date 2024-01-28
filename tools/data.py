@@ -58,6 +58,7 @@ def get_surrounding_zip_codes(base_zip, radius=5):
     return [zipcode.zipcode for zipcode in nearby_zip_codes]
 
 
+#fallback incase inital zip code is faulty
 def secondary_search(keyw, loca, rad, lat_input, lng_input):
     host = 'jooble.org'
     key = 'ba0e5c67-fec5-49b3-9f46-5d50a445097b'
@@ -132,16 +133,27 @@ def search(keyw, loca, rad, lat_input, lng_input):
             dct["dummy"] = float(dct["Real_distance"][:-3])
             #l = dct["Address"].split(", ")
         lst.append(dct)
-    return sorted(lst, key=lambda x: x["dummy"])
+    #return sorted(lst, key=lambda x: x["dummy"])
+    data = sorted(lst, key=lambda x: x["dummy"])
+    file_path = "output.json"
+    with open(file_path, 'w') as json_file:
+        json.dump(data, json_file, indent=2) 
+    
+    #logo generation
+    for i in data:
+        if len(i["Company"]) > 0:
+            logo.get_logo(i["Company"].replace(" ", ""))
 
-
+"""
 data = search("software engineer", coor_to_zip.get_zip(33.736696, -118.015753), 10, 33.736696, -118.015753)
-'''
+
 for d in data:
     print(d)
     print(" ")
     print(" ")
-'''
+
 file_path = "output.json"
 with open(file_path, 'w') as json_file:
     json.dump(data, json_file, indent=2) 
+"""
+search("software engineer", coor_to_zip.get_zip(33.736696, -118.015753), 10, 33.736696, -118.015753)
