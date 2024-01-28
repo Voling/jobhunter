@@ -1,0 +1,66 @@
+.menu-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    position: fixed;
+    top: 0;
+    left: -300px; /* or use percentage */
+    z-index: 1000; /* higher than the map's z-index */
+    width: 300px; /* or any desired width */
+    height: 50%; /* full height */
+    background: white;
+    transition: left 0.5s ease-in-out;
+}
+
+.menu-container.open {
+    left: 0; /* Slide in */
+}
+
+.toggleMenu {
+    margin-bottom: 20px;
+}
+
+.menu-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-container label {
+    margin-bottom: 10px;
+}
+
+.menu-container label > div {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.menu-container input[type="text"],
+.menu-container input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.menu-container button {
+    padding: 10px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.menu-container button:hover {
+    background-color: #357ae8;
+}
+
+
+/* swiwnging */

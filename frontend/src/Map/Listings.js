@@ -4,37 +4,36 @@ import L from 'leaflet'
 import MapContext from './MapContext.js'
 import { useContext } from 'react';
 import { fetchListings } from './api.js';
-
-
+import './Listings.css'
 const testIcon = new L.Icon({
     iconUrl: 'images/ethansditto.png', // URL to the custom icon image
     iconSize: [70, 41],    // Size of the icon
     iconAnchor: [12, 41],  // Point of the icon which will correspond to marker's location
     popupAnchor: [15, -35], // Point from which the popup should open relative to the iconAnchor
 }); //testing
+const iconSize = [50, 50]
+const iconAnchor = [25, 50]
+const popupAnchor = [25, -35]
 function Listings() {
-    // const {position, setPosition, listings, setListings} = React.useContext(MapContext);
-    var mk = [];
-    //var mkCoords = [[33.68, -117.82], [33.68, -117.83], [33.67, -117.81], [33.65, -117.82], [33.68, -117.81], [33.68, -117.82]];
-    //for (let i = 0; i < 6; i++) {
-    //    mk.push(<Marker key={i} position={[mkCoords[i][0], mkCoords[i][1]]} icon={testIcon}></Marker>)
-    //}
-    /*
-    Title
-    Location
-    Company
-    Address
-    Lat
-    Lng
-    Geo_distance
-    Real_distance
-    */
+    //update listings based on state
     const { position, setPosition, listings, setListings } = React.useContext(MapContext);
-    //fetchListings(position)
-    for (const i in listings) {
-        //return [<Marker position = {[0,0]} icon = {"ABC"}></Marker>]
-        //return <Marker position = {[i[0], i[1]]} icon = {i[5]}></Marker>
-    }
-    //return [<Marker position = {[0,0]} icon = {"ABC"}></Marker>]; //for each job listing found
+    console.log("Updating Listings...")
+    return listings.map((listing, index) => (
+        <Marker 
+            key={index}
+            position={[listing.Lat, listing.Lng]} 
+            icon={testIcon}>
+            <Popup>
+                <div style={{color: 'blue'}}>
+                    <h3>{listing.Title}</h3>
+                    <p class='markerField'>{listing.Company}</p>
+                    <p class='markerField'>{listing.Location}</p>
+                    <p class='markerField'>{listing.Address}</p>
+                    <p class='markerField'>Geo Distance: {listing.Geo_distance} mi</p>
+                    <p class='markerField'>Real Distance: {listing.Real_distance} mi</p>
+                </div>
+            </Popup>
+        </Marker>
+    ));
 }
 export default Listings;
