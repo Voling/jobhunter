@@ -69,9 +69,10 @@ function Menu() {
   
     fetchListings({
       keyword: input,
+      location: "irvine",
       radius: radius,
-      positionX: position[0],
-      positionY: position[1],
+      lat_input: position[0],
+      lng_input: position[1],
     })
       .then((data) => {
         console.log("Listings fetched successfully:", data);

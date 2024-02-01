@@ -15,18 +15,18 @@ const test = `[
     "Real_distance": "1.3 mi",
     "dummy": 1.3
   }]`
-export async function fetchListings({ keyword, radius, positionX, positionY }) {
+export async function fetchListings({ keyword, radius, location, lat_input, lng_input }) {
   console.log("Sending listings query...");
   try {
-    const response = await axiosInstance.get('api/search/', {
+    const response = await axiosInstance.get('/search/', {
       params: {
         keyword,
+        location,
         radius,
-        positionX,
-        positionY
+        lat_input,
+        lng_input
       }
     });
-    // Assuming the response data is the format you need
     return response.data;
   } catch (error) {
     console.error("Failed to retrieve listings, returning test data", error);
