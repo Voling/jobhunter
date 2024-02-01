@@ -162,9 +162,9 @@ def get_logo_view(request):
 logger = logging.getLogger(__name__)
 @csrf_exempt
 def search_view(request):
-    keyw = request.GET.get('keyw')
-    loca = request.GET.get('loca')
-    rad = request.GET.get('rad', '5')  # Default to '5' if not provided
+    keyw = request.GET.get('keyword')
+    loca = request.GET.get('location')
+    rad = request.GET.get('radius', '5')  # Default to '5' if not provided
     lat_input = request.GET.get('lat_input')
     lng_input = request.GET.get('lng_input')
 
@@ -172,15 +172,13 @@ def search_view(request):
     try:
         if not all([keyw, loca, lat_input, lng_input]):
             return JsonResponse({"error": "keyw, loca, lat_input, and lng_input parameters are required."}, status=400)
-
         try:
-            rad = int(rad)  # Ensure rad is an integer
+            rad = int(rad) #force radius to int
         except ValueError:
             logger.error(f"Error in search_view: {e}", exc_info=True)
             return JsonResponse({"error": "rad must be an integer."}, status=400)
 
-        # Call the search function from data.py
-        file_path = search(keyw, loca, rad, lat_input, lng_input)
+        file_path = search(keyw, loca, rad, lat_input, lng_input) #call search
 
         #serve file
         if file_path:
@@ -192,9 +190,7 @@ def search_view(request):
                 logger.error(f"Error in search_view: {e}", exc_info=True)
                 return JsonResponse({"error": str(e)}, status=500)
         else:
-            
             return JsonResponse({"error": "Failed to perform search or generate file."}, status=500)
     except Exception as e:
-        print("HI", e)
         logger.error(f"Error in search_view: {e}", exc_info=True)
         return JsonResponse({"error": str(e)}, status=500)
