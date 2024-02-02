@@ -19,3 +19,5 @@ cd frontend
 npm install
 npm run
 ```
+
+If a new browser page isn't opened automatically, go to **localhost:3000** in your browser.
