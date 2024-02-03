@@ -1,12 +1,9 @@
 .app-container {
     display: flex;
-    height: 96vh;
+    height: 100vh;
 }
 
-/* .menu-section {
-    width: 250px;
-    background-color: #ffffff;
-} */
 .map-section {
-    flex-grow: 1;
-}
+    height: 100%;
+    width: 100%;
+  }
