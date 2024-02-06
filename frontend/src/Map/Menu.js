@@ -2,8 +2,8 @@ import React from "react";
 import MapContext from "./MapContext";
 import { useContext } from "react";
 import { fetchListings } from "./api";
-import "./menu.css";
 import { Link } from "react-router-dom";
+import { TextField, Box, Button, Slide } from "@mui/material";
 
 function Menu() {
   const { position, setPosition, listings, setListings } =
@@ -11,86 +11,113 @@ function Menu() {
   const [input, setInput] = React.useState("");
   const [radius, setRadius] = React.useState(5);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isMenuResultVisible, setIsMenuResultVisible] = React.useState();
 
-  function toggleMenu() {
+  const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  }
+  };
 
-  function submitToggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
-  }
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log("Input updated");
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [input]);
+  const handleRadiusChange = (e) => {
+    setRadius(e.target.value);
+  };
 
-  function handleInputChange(e) {
-    setInput(e.target.value); //state management
-  }
-
-  function handleRadiusChange(e) {
-    setRadius(e.target.value); // radius state management
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    fetchListings({
-      keyword: input,
-      radius: radius,
-      positionX: position[0],
-      positionY: position[1],
-    })
-      .then((data) => {
-        console.log("Listings fetched successfully:", data);
-        setListings(data);
+
+    if (input && radius) {
+      fetchListings({
+        keyword: input,
+        location: "irvine",
+        radius: radius,
+        lat_input: position[0],
+        lng_input: position[1],
       })
-      .catch((error) => {
-        console.error("Failed to fetch listings:", error);
-      });
-  }
+        .then((data) => {
+          console.log("Listings fetched successfully:", data);
+          setListings(data);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch listings:", error);
+        });
+    }
+  };
 
   return (
     <>
-      <button className="toggleMenu" onClick={submitToggleMenu}>
-        Toggle Menu
-      </button>
-      <Link className="home" to={"/"}>
-        Home
-      </Link>
-      <div className={`menu-container ${isMenuOpen ? "open" : ""}`}>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <span style={{ backgroundColor: "#d3d3d3" }}>
-              Input a job name...
-            </span>
-            <input
-              type="text"
-              name="na"
-              value={input}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            <span style={{ backgroundColor: "#d3d3d3" }}>Select a radius</span>
-            <input
-              type="number"
-              name="radius"
-              value={radius}
-              onChange={handleRadiusChange}
-            />
-          </label>
-          <button type="submit" onClick={toggleMenu}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 10,
+          left: 50,
+          zIndex: 900,
+          display: "flex",
+          gap: 1,
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={toggleMenu}
+          sx={{ width: 100, height: 60 }}
+        >
+          Toggle Menu
+        </Button>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ width: 100, height: 60 }}
+          >
+            Home
+          </Button>
+        </Link>
+      </Box>
+      <Slide direction="right" in={isMenuOpen} mountOnEnter unmountOnExit>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            position: "absolute",
+            top: 80,
+            left: 10,
+            width: 275,
+            padding: 2,
+            backgroundColor: "white",
+            border: "1px solid grey",
+            borderRadius: "4px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            zIndex: 1000,
+          }}
+        >
+          <TextField
+            label="Input a Job Name..."
+            variant="outlined"
+            name="na"
+            value={input}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label="Select a radius"
+            variant="outlined"
+            type="number"
+            name="radius"
+            value={radius}
+            onChange={handleRadiusChange}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ margin: 1 }}
+          >
             Submit
-          </button>
-        </form>
-        <div
-          className={`menu-container-result ${isMenuOpen ? "open" : ""}`}
-        ></div>
-      </div>
+          </Button>
+        </Box>
+      </Slide>
     </>
   );
 }

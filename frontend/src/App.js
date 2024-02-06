@@ -15,6 +15,8 @@ function App() {
   const location = useLocation();
   const [position, setPosition] = React.useState([33.640, -117.838]);
   const [listings, setListings] = React.useState([]);
+  // const [address, setAddress] = React.useState("");
+
   
   return (
     <MapContext.Provider value={{ position, setPosition, listings, setListings }}>
