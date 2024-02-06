@@ -97,7 +97,8 @@ def secondary_search(keyw, loca, rad, lat_input, lng_input):
 
 
 
-def search(keyw, loca, rad, lat_input, lng_input):
+def search(keyw, rad, lat_input, lng_input):
+    loca = coor_to_zip.get_zip(lat_input, lng_input)
     host = 'jooble.org'
     key = 'ba0e5c67-fec5-49b3-9f46-5d50a445097b'
     if not loca:
@@ -182,5 +183,5 @@ file_path = "output.json"
 with open(file_path, 'w') as json_file:
     json.dump(data, json_file, indent=2) 
 """
-#search("software engineer", coor_to_zip.get_zip(33.736696, -118.015753), 10, 33.736696, -118.015753)
+#search("software engineer", 10, 33.736696, -118.015753)
 #print(only_geocode("141 Berkeley Ave, Irvine"))
