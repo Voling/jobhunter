@@ -1,5 +1,5 @@
 import React from 'react';
-import {Marker, Popup} from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import MapContext from './MapContext.js'
 import { fetchListings } from './api.js';
@@ -18,12 +18,13 @@ function Listings() {
     const { position, setPosition, listings, setListings } = React.useContext(MapContext);
     console.log("Updating Listings...")
     return listings.map((listing, index) => ( //guaranteed to not be a promise
-        <Marker 
+    // be sure to replace testIcon with LogoPath (now in response dict)
+        <Marker
             key={index}
-            position={[listing.Lat, listing.Lng]} 
+            position={[listing.Lat, listing.Lng]}
             icon={testIcon}>
             <Popup>
-                <div style={{color: 'blue'}}>
+                <div style={{ color: 'blue' }}>
                     <h3>{listing.Title}</h3>
                     <p class='markerField'>{listing.Company}</p>
                     <p class='markerField'>{listing.Location}</p>

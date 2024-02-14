@@ -170,6 +170,7 @@ def search(keyw, loca, rad, lat_input, lng_input):
         #logo generation
         for i in data:
             if len(i["Company"]) > 0:
-                logo.get_logo(i["Company"].replace(" ", ""))
+                dct["LogoPath"] = logo.get_logo(i["Company"].replace(" ", ""))
+        return file_path
     except Exception as e:
         print(e)

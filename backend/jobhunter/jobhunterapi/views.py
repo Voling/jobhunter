@@ -182,9 +182,7 @@ def search_view(request):
 
         #serve file
         if file_path:
-            
             try:
-                
                 return FileResponse(open(file_path, 'rb'), as_attachment=True, filename="output.json")
             except Exception as e:
                 logger.error(f"Error in search_view: {e}", exc_info=True)
