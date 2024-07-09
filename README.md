@@ -2,6 +2,12 @@
 A webapp to ease the struggles of commuting to possible new jobs in a new area. Find jobs in your new area by specifying your title and desired radius and clicking on the map!
 Quickly get links to apply and Glassdoor (tbd) information to vet your new potential places of work.
 
+# Members
+- Husain Wafaie
+- Dylan Vo
+- Jason Yim
+- Ryan Park
+  
 # Running the app
 # Starting Django server
 Create a virtual environment inside `backend`
