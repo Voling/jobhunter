@@ -9,13 +9,13 @@ from uszipcode import SearchEngine
 import http.client
 from urllib.parse import urlencode
 import json
-from keys import jooble_key, google_key
+from . import keys
 
 #find coordinates given address
 def geocode(address):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
-    params = urlencode({'address': address, 'key': google_key})
+    params = urlencode({'address': address, 'key': keys.google_key})
     connection = http.client.HTTPSConnection(host)
     connection.request("GET", f"{base_url}?{params}")
     response = connection.getresponse()
@@ -30,7 +30,7 @@ def geocode(address):
 def only_geocode(address):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
-    params = urlencode({'address': address, 'key': google_key})
+    params = urlencode({'address': address, 'key': keys.google_key})
     connection = http.client.HTTPSConnection(host)
     connection.request("GET", f"{base_url}?{params}")
     response = connection.getresponse()
@@ -47,7 +47,7 @@ def get_company_address(company_name, city):
     # URL-encode the parameters
     params = urlencode({
         'address': f'{company_name}, {city}',
-        'key': google_key
+        'key': keys.google_key
     })
     
     connection = http.client.HTTPSConnection(host)
@@ -85,7 +85,7 @@ def secondary_search(keyw, loca, rad, lat_input, lng_input):
     headers = {"Content-type": "application/json"}
     #json query
     body = f'{{ "keywords": "{keyw}", "location": "{loca}", "radius": "{rad}"}}'
-    connection.request('POST','/api/' + jooble_key, body, headers)
+    connection.request('POST','/api/' + keys.jooble_key, body, headers)
     response = connection.getresponse()
     #print(response.status, response.reason)
 
@@ -114,7 +114,7 @@ def search(keyw, loca, rad, lat_input, lng_input):
         headers = {"Content-type": "application/json"}
         #json query
         body = f'{{ "keywords": "{keyw}", "location": "{loca}", "radius": "{rad}"}}'
-        connection.request('POST','/api/' + jooble_key, body, headers)
+        connection.request('POST','/api/' + keys.jooble_key, body, headers)
         response = connection.getresponse()
         #print(response.status, response.reason)
 
