@@ -9,13 +9,13 @@ from uszipcode import SearchEngine
 import http.client
 from urllib.parse import urlencode
 import json
+from keys import jooble_key, google_key
 
 #find coordinates given address
 def geocode(address):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
-    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
-    params = urlencode({'address': address, 'key': api_key})
+    params = urlencode({'address': address, 'key': google_key})
     connection = http.client.HTTPSConnection(host)
     connection.request("GET", f"{base_url}?{params}")
     response = connection.getresponse()
@@ -30,8 +30,7 @@ def geocode(address):
 def only_geocode(address):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
-    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
-    params = urlencode({'address': address, 'key': api_key})
+    params = urlencode({'address': address, 'key': google_key})
     connection = http.client.HTTPSConnection(host)
     connection.request("GET", f"{base_url}?{params}")
     response = connection.getresponse()
@@ -44,12 +43,11 @@ def only_geocode(address):
 def get_company_address(company_name, city):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
-    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'  # Be careful with your API key, don't expose it in your code.
     
     # URL-encode the parameters
     params = urlencode({
         'address': f'{company_name}, {city}',
-        'key': api_key
+        'key': google_key
     })
     
     connection = http.client.HTTPSConnection(host)
@@ -81,14 +79,13 @@ def get_surrounding_zip_codes(base_zip, radius=5):
 #fallback incase inital zip code is faulty
 def secondary_search(keyw, loca, rad, lat_input, lng_input):
     host = 'jooble.org'
-    key = 'ba0e5c67-fec5-49b3-9f46-5d50a445097b'
 
     connection = http.client.HTTPConnection(host)
     #request headers
     headers = {"Content-type": "application/json"}
     #json query
     body = f'{{ "keywords": "{keyw}", "location": "{loca}", "radius": "{rad}"}}'
-    connection.request('POST','/api/' + key, body, headers)
+    connection.request('POST','/api/' + jooble_key, body, headers)
     response = connection.getresponse()
     #print(response.status, response.reason)
 
@@ -105,7 +102,6 @@ def secondary_search(keyw, loca, rad, lat_input, lng_input):
 def search(keyw, loca, rad, lat_input, lng_input):
     try:
         host = 'jooble.org'
-        key = 'ba0e5c67-fec5-49b3-9f46-5d50a445097b'
         if not loca:
             data = []
             file_path = "output.json"
@@ -118,7 +114,7 @@ def search(keyw, loca, rad, lat_input, lng_input):
         headers = {"Content-type": "application/json"}
         #json query
         body = f'{{ "keywords": "{keyw}", "location": "{loca}", "radius": "{rad}"}}'
-        connection.request('POST','/api/' + key, body, headers)
+        connection.request('POST','/api/' + jooble_key, body, headers)
         response = connection.getresponse()
         #print(response.status, response.reason)
 

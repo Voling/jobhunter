@@ -1,13 +1,13 @@
 import http.client
 import json
 from urllib.parse import urlencode
+from keys import google_key
 
 def get_real_distance(origin, destination):
     host = "maps.googleapis.com"
     base_url = "/maps/api/directions/json"
-    api_key = 'AIzaSyBCZo8kaQLiNBtcXHuWyLFyCgcWHbgZ4mo'
 
-    params = urlencode({ 'origin': origin, 'destination': destination,'key': api_key})
+    params = urlencode({ 'origin': origin, 'destination': destination,'key': google_key})
 
     connection = http.client.HTTPSConnection(host)
 
