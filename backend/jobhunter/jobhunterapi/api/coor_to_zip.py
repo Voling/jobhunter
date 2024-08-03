@@ -28,7 +28,7 @@ def get_address(lat, lng):
     host = "maps.googleapis.com"
     base_url = "/maps/api/geocode/json"
 
-    params = f"latlng={lat},{lng}&key={google_key}"
+    params = f"latlng={lat},{lng}&key={keys.google_key}"
 
     connection = http.client.HTTPSConnection(host)
     connection.request("GET", f"{base_url}?{params}")
